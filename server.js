@@ -36,7 +36,8 @@ app.use(express.json({ limit: '64kb' }));
 // En producción servimos el build de Vite (frontend/dist).
 // En desarrollo Vite se ejecuta aparte en :5173 con proxy a /api,
 // así que estos archivos no se usan hasta que hagas `npm run build` en frontend.
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+const FRONTEND_DIST = path.join(__dirname, 'frontend', 'dist');
+app.use(express.static(FRONTEND_DIST));
 
 app.get('/api/health', (_req, res) => {
   res.json({
@@ -148,6 +149,18 @@ function logEvent(evt) {
     /* noop */
   }
 }
+
+// SPA fallback — cualquier ruta que no sea /api sirve el index.html
+// Esto permite que el frontend funcione en producción incluso sin rutas configuradas.
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api/')) return next();
+  res.sendFile(path.join(FRONTEND_DIST, 'index.html'), (err) => {
+    if (err) {
+      console.error('No se encontró frontend/dist/index.html:', err.message);
+      res.status(500).send('Frontend no compilado. Revisa el build.');
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`IA SIYAYO escuchando en http://localhost:${PORT}`);

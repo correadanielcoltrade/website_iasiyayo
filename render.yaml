@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: ia-siyayo
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_BASE_URL
+        value: https://integrate.api.nvidia.com/v1
+      - key: OPENAI_MODEL
+        value: meta/llama-3.3-70b-instruct
+      - key: OPENAI_TEMPERATURE
+        value: "0.3"
+      - key: OPENAI_MAX_OUTPUT_TOKENS
+        value: "120"
+      - key: LLM_THINKING
+        value: "false"
+      - key: MAX_INPUT_CHARS
+        value: "2000"
+      - key: RATE_LIMIT_PER_MIN
+        value: "30"
+      - key: CACHE_TTL_MS
+        value: "3600000"
+      - key: CACHE_MAX_ENTRIES
+        value: "500"

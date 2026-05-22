@@ -1,0 +1,25 @@
+{
+  "name": "ia-siyayo",
+  "version": "0.1.0",
+  "description": "IA SIYAYO — Transforma mensajes en versiones positivas, conscientes y elevadas.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently --names \"backend,frontend\" --prefix-colors \"blue,cyan\" \"node --watch server.js\" \"npm --prefix frontend run dev\"",
+    "dev:backend": "node --watch server.js",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "install:frontend": "npm --prefix frontend install",
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

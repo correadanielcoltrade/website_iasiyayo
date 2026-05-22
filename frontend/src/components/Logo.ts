@@ -20,9 +20,11 @@ export function Logo({ width = 56, height = 28 }: LogoProps = {}): string {
     <svg class="logo-inline" viewBox="0 0 100 50" width="${width}" height="${height}" aria-label="SIYAYO" role="img">
       <defs>
         <linearGradient id="${uid}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"  stop-color="#F4D03F"/>
-          <stop offset="55%" stop-color="#D4A017"/>
-          <stop offset="100%" stop-color="#B68A1A"/>
+          <stop offset="0%"  stop-color="#FFF4B0"/>
+          <stop offset="28%" stop-color="#FFD700"/>
+          <stop offset="58%" stop-color="#D4AF37"/>
+          <stop offset="82%" stop-color="#8A6500"/>
+          <stop offset="100%" stop-color="#FFE27A"/>
         </linearGradient>
       </defs>
       <path
